@@ -5,4 +5,8 @@
     <string name="title_activity_next">Next Activity</string>
     <string name="title_activity_main">Main Activity</string>
     <string name="show_message">Show message</string>
+    <!-- Comment for red test in MainActivityText -->
+    <!--<string name="message_hello_toast">Hi!</string>-->
+    <!-- Uncomment for green test in MainActivityText-->
+    <string name="message_hello_toast">Hello! I\'m toast message!</string>
 </resources>
