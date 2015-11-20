@@ -1,4 +1,4 @@
-package com.alekseiivhsin.samples.testedproject;
+package com.alekseiivhsin.samples.testedproject.test;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
