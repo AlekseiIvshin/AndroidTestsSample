@@ -23,6 +23,12 @@
             android:label="@string/title_activity_next"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+
+        <service
+            android:name=".TestedService"
+            android:enabled="false"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>
