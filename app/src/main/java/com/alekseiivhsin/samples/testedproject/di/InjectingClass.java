@@ -5,10 +5,10 @@ package com.alekseiivhsin.samples.testedproject.di;
  */
 public class InjectingClass  implements IInjectingClass{
 
-    private static final String SECRET_VALUE = "SECRET_VALUE";
+    private static final String MAGIC_VALUE = "MAGIC_VALUE";
 
     @Override
-    public String getValue(){
-        return SECRET_VALUE;
+    public String getMagicValue(){
+        return MAGIC_VALUE;
     }
 }

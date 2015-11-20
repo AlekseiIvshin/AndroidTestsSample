@@ -1,8 +1,9 @@
-package com.alekseiivhsin.samples.testedproject;
+package com.alekseiivhsin.samples.testedproject.test;
+
+import com.alekseiivhsin.samples.testedproject.BuildConfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
@@ -15,6 +16,6 @@ import org.robolectric.annotation.Config;
 public class TestedServiceTest {
 
     @Test
-    public void intent_shouldStartService(){
+    public void intent_shouldStartService() {
     }
 }

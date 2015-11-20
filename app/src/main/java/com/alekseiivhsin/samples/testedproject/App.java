@@ -9,12 +9,8 @@ import com.alekseiivhsin.samples.testedproject.di.Graph;
  */
 public class App extends Application {
 
-    private Graph mGraph;
-    private static App mInstance;
-
-    public static App getInstance(){
-        return mInstance;
-    }
+    protected Graph mGraph;
+    protected static App mInstance;
 
     public static Graph getObjectGraph(){
         return mInstance.getGraph();
@@ -23,8 +19,12 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mGraph = Graph.Initializer.init(false);
+        mGraph = initObjectGraph();
         mInstance = this;
+    }
+
+    protected Graph initObjectGraph(){
+        return Graph.Initializer.init();
     }
 
     public Graph getGraph(){

@@ -1,7 +1,5 @@
 package com.alekseiivhsin.samples.testedproject.di;
 
-import org.mockito.Mockito;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -14,19 +12,9 @@ import dagger.Provides;
 @Module
 public class DependencyModule {
 
-    private final boolean mMockMode;
-
-    public DependencyModule(boolean mockMode) {
-        mMockMode = mockMode;
-    }
-
     @Provides
     @Singleton
-    public InjectingClass provideInjectingClass() {
-        if (mMockMode) {
-            return Mockito.mock(InjectingClass.class);
-        } else {
-            return new InjectingClass();
-        }
+    public IInjectingClass provideInjectingClass() {
+        return new InjectingClass();
     }
 }

@@ -1,7 +1,12 @@
-package com.alekseiivhsin.samples.testedproject;
+package com.alekseiivhsin.samples.testedproject.test;
 
 import android.app.Activity;
 import android.content.Intent;
+
+import com.alekseiivhsin.samples.testedproject.BuildConfig;
+import com.alekseiivhsin.samples.testedproject.MainActivity;
+import com.alekseiivhsin.samples.testedproject.NextActivity;
+import com.alekseiivhsin.samples.testedproject.R;
 
 import junit.framework.TestCase;
 

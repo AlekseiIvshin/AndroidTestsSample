@@ -1,22 +1,21 @@
-package com.alekseiivhsin.samples.testedproject;
+package com.alekseiivhsin.samples.testedproject.test;
 
-import com.alekseiivhsin.samples.testedproject.di.Graph;
+import com.alekseiivhsin.samples.testedproject.BuildConfig;
+import com.alekseiivhsin.samples.testedproject.NextActivity;
 import com.alekseiivhsin.samples.testedproject.di.IInjectingClass;
-import com.alekseiivhsin.samples.testedproject.di.InjectingClass;
 
 import junit.framework.Assert;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ActivityController;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,26 +26,38 @@ import static org.mockito.Mockito.when;
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(sdk = 21,
         constants = BuildConfig.class,
-        application = App.class)
+        application = TestApp.class)
 public class NextActivityTest {
+
+    IInjectingClass mockInjectingClass = mock(IInjectingClass.class);
+
+    MockDependencyModule mockDependencyModule = new MockDependencyModule();
+
+    @Before
+    public void setUp(){
+        mockDependencyModule.setMockInjectingClass(mockInjectingClass);
+        ((TestApp) ShadowApplication.getInstance().getApplicationContext()).reinitializeObjectGraph(mockDependencyModule);
+    }
 
     @Test
     public void onActivityStart_shouldGetSecretValue() {
         // Given
+        // init mock
+        when(mockInjectingClass.getMagicValue()).thenReturn("TEST VALUE");
+
+        // Prepare tested activity for test lifecycle
         ActivityController<NextActivity> activityController = Robolectric.buildActivity(NextActivity.class)
                 .create();
         NextActivity nextActivity = activityController.get();
 
-        IInjectingClass mockInjectingClass = Mockito.mock(IInjectingClass.class);
-        when(mockInjectingClass.getValue()).thenReturn("TEST VALUE");
-
-        nextActivity.setInjectingClass(mockInjectingClass);
 
         // When
         activityController.start();
 
         // Then
+        // Check that we call injecting class for get magic value
+        verify(mockInjectingClass, times(1)).getMagicValue();
+        // Check that magic value get from injecting class equals to expected
         Assert.assertEquals("Values should be equals", "TEST VALUE", nextActivity.getSecretValue());
-        verify(mockInjectingClass,times(1)).getValue();
     }
 }

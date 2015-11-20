@@ -17,8 +17,8 @@ public interface Graph {
     void inject(NextActivity nextActivity);
 
     final class Initializer {
-        public static Graph init(boolean mockMode) {
-            return DaggerGraph.builder().dependencyModule(new DependencyModule(mockMode)).build();
+        public static Graph init() {
+            return DaggerGraph.builder().dependencyModule(new DependencyModule()).build();
         }
     }
 }
