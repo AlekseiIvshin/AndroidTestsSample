@@ -8,7 +8,10 @@ import org.junit.runners.Suite;
  */
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({MainActivityTest.class,TestedServiceTest.class})
-public class MyTestSuite{
+@Suite.SuiteClasses({
+        MainActivityTest.class,
+        TestedServiceTest.class,
+        NextActivityTest.class})
+public class MyTestSuite {
 
 }

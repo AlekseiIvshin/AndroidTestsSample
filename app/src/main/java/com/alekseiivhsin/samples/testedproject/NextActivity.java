@@ -7,23 +7,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.alekseiivhsin.samples.testedproject.di.IInjectingClass;
+import com.alekseiivhsin.samples.testedproject.di.InjectingClass;
+
 public class NextActivity extends AppCompatActivity {
+
+    private IInjectingClass mInjectedClass;
+    private String secretValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        ((App)getApplication()).getGraph().inject(this);
         setContentView(R.layout.activity_next);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
+    public void setInjectingClass(IInjectingClass injectedClass) {
+        this.mInjectedClass = injectedClass;
+    }
+
+    public String getSecretValue() {
+        return secretValue;
+    }
 }
