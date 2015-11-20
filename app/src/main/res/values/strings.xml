@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TestedProject</string>
+    <string name="action_settings">Settings</string>
+    <string name="show_next">Show next activity</string>
+    <string name="title_activity_next">NextActivity</string>
+    <string name="title_activity_main">Main Activity</string>
+</resources>
