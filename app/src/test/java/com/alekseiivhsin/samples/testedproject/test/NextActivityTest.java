@@ -2,7 +2,7 @@ package com.alekseiivhsin.samples.testedproject.test;
 
 import com.alekseiivhsin.samples.testedproject.BuildConfig;
 import com.alekseiivhsin.samples.testedproject.NextActivity;
-import com.alekseiivhsin.samples.testedproject.di.IInjectingClass;
+import com.alekseiivhsin.samples.testedproject.di.IMagicClass;
 
 import junit.framework.Assert;
 
@@ -29,14 +29,15 @@ import static org.mockito.Mockito.when;
         application = TestApp.class)
 public class NextActivityTest {
 
-    IInjectingClass mockInjectingClass = mock(IInjectingClass.class);
+    IMagicClass mockInjectingClass = mock(IMagicClass.class);
 
     MockDependencyModule mockDependencyModule = new MockDependencyModule();
 
     @Before
     public void setUp(){
-        mockDependencyModule.setMockInjectingClass(mockInjectingClass);
-        ((TestApp) ShadowApplication.getInstance().getApplicationContext()).reinitializeObjectGraph(mockDependencyModule);
+        mockDependencyModule.setMockMagicClass(mockInjectingClass);
+        ((TestApp) ShadowApplication.getInstance().getApplicationContext())
+                .reinitializeObjectGraph(mockDependencyModule);
     }
 
     @Test
@@ -46,10 +47,11 @@ public class NextActivityTest {
         when(mockInjectingClass.getMagicValue()).thenReturn("TEST VALUE");
 
         // Prepare tested activity for test lifecycle
-        ActivityController<NextActivity> activityController = Robolectric.buildActivity(NextActivity.class)
+        ActivityController<NextActivity> activityController
+                = Robolectric
+                .buildActivity(NextActivity.class)
                 .create();
         NextActivity nextActivity = activityController.get();
-
 
         // When
         activityController.start();
@@ -58,6 +60,6 @@ public class NextActivityTest {
         // Check that we call injecting class for get magic value
         verify(mockInjectingClass, times(1)).getMagicValue();
         // Check that magic value get from injecting class equals to expected
-        Assert.assertEquals("Values should be equals", "TEST VALUE", nextActivity.getSecretValue());
+        Assert.assertEquals("Values should be equals", "TEST VALUE", nextActivity.getMagicValue());
     }
 }

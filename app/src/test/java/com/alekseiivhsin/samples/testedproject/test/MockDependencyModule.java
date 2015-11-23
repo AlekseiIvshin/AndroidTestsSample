@@ -1,7 +1,7 @@
 package com.alekseiivhsin.samples.testedproject.test;
 
 import com.alekseiivhsin.samples.testedproject.di.DependencyModule;
-import com.alekseiivhsin.samples.testedproject.di.IInjectingClass;
+import com.alekseiivhsin.samples.testedproject.di.IMagicClass;
 
 import org.mockito.Mockito;
 
@@ -10,15 +10,15 @@ import org.mockito.Mockito;
  */
 public class MockDependencyModule extends DependencyModule {
 
-    protected IInjectingClass mockInjectingClass = Mockito.mock(IInjectingClass.class);
+    protected IMagicClass mockMagicClass = Mockito.mock(IMagicClass.class);
 
-    public void setMockInjectingClass(IInjectingClass mockInjectingClass) {
-        this.mockInjectingClass = mockInjectingClass;
+    public void setMockMagicClass(IMagicClass mockMagicClass) {
+        this.mockMagicClass = mockMagicClass;
     }
 
     @Override
-    public IInjectingClass provideInjectingClass() {
-        return mockInjectingClass;
+    public IMagicClass provideMagicClass() {
+        return mockMagicClass;
     }
 
 }

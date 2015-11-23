@@ -4,17 +4,17 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.alekseiivhsin.samples.testedproject.di.IInjectingClass;
+import com.alekseiivhsin.samples.testedproject.di.IMagicClass;
 
 import javax.inject.Inject;
 
 public class NextActivity extends AppCompatActivity {
 
     @Inject
-    IInjectingClass mInjectedClass;
+    IMagicClass mMagicClass;
 
 
-    private String secretValue;
+    private String mMagicValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +28,10 @@ public class NextActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        secretValue = mInjectedClass.getMagicValue();
+        mMagicValue = mMagicClass.getMagicValue();
     }
 
-    public String getSecretValue() {
-        return secretValue;
+    public String getMagicValue() {
+        return mMagicValue;
     }
 }

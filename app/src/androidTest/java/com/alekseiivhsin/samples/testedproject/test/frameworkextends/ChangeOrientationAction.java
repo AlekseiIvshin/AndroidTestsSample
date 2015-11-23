@@ -26,21 +26,10 @@ public class ChangeOrientationAction implements ViewAction {
         return new ChangeOrientationAction(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
-    public static ViewAction flipOrientation() {
-        return new ChangeOrientationAction();
-    }
-
     private final int mOrientation;
-    private final boolean mFlipOrientationFlag;
 
     private ChangeOrientationAction(int orientation) {
         this.mOrientation = orientation;
-        this.mFlipOrientationFlag = false;
-    }
-
-    private ChangeOrientationAction() {
-        this.mOrientation = 0;
-        this.mFlipOrientationFlag = true;
     }
 
     @Override
@@ -50,9 +39,6 @@ public class ChangeOrientationAction implements ViewAction {
 
     @Override
     public String getDescription() {
-        if (mFlipOrientationFlag) {
-            return "Flip orientation from land to port or vice versa";
-        }
         return "Change orientation to " + mOrientation;
     }
 
@@ -60,39 +46,11 @@ public class ChangeOrientationAction implements ViewAction {
     public void perform(UiController uiController, View view) {
         uiController.loopMainThreadUntilIdle();
         final Activity activity = (Activity) view.getContext();
-        if (mFlipOrientationFlag) {
-            setNextOrientation(activity);
-        } else {
-            setRequestOrientation(activity, mOrientation);
-        }
+        activity.setRequestedOrientation(mOrientation);
 
         Collection<Activity> resumedActivity = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
         if (resumedActivity.isEmpty()) {
             throw new RuntimeException("Could not change orientation");
         }
-    }
-
-    private void setNextOrientation(Activity activity) {
-        int currentOrientation = activity.getResources().getConfiguration().orientation;
-        switch (currentOrientation) {
-            case ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:
-                setRequestOrientation(activity, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                break;
-            case ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
-                setRequestOrientation(activity, ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
-                break;
-            case ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE:
-                setRequestOrientation(activity, ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
-                break;
-            case ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT:
-                setRequestOrientation(activity, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                break;
-            default:
-                throw new IllegalArgumentException("Can not handle orientation " + currentOrientation);
-        }
-    }
-
-    private void setRequestOrientation(Activity activity, int orientation) {
-        activity.setRequestedOrientation(orientation);
     }
 }

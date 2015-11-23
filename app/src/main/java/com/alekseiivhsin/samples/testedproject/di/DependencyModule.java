@@ -14,7 +14,7 @@ public class DependencyModule {
 
     @Provides
     @Singleton
-    public IInjectingClass provideInjectingClass() {
-        return new InjectingClass();
+    public IMagicClass provideMagicClass() {
+        return new MagicClass();
     }
 }

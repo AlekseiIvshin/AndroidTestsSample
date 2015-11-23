@@ -3,7 +3,7 @@ package com.alekseiivhsin.samples.testedproject.di;
 /**
  * Created on 20/11/2015.
  */
-public class InjectingClass  implements IInjectingClass{
+public class MagicClass implements IMagicClass {
 
     private static final String MAGIC_VALUE = "MAGIC_VALUE";
 
