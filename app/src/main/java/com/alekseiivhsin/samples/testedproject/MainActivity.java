@@ -1,19 +1,23 @@
 package com.alekseiivhsin.samples.testedproject;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    View mChikenView;
-    Button mChickenVisibilityToggler;
+    View mChickenView;
+    Button mChickenVisibilityToggle;
+    TextView mOrientationLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +26,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mChikenView = findViewById(R.id.chicken);
-        mChickenVisibilityToggler = (Button) findViewById(R.id.toggle_image_visibility);
+        mChickenView = findViewById(R.id.chicken);
+        mChickenVisibilityToggle = (Button) findViewById(R.id.toggle_image_visibility);
+        mOrientationLabel = (TextView) findViewById(R.id.orientation_label);
 
         findViewById(R.id.show_next).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,15 +48,24 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.toggle_image_visibility).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(View.VISIBLE == mChikenView.getVisibility()) {
-                    mChikenView.setVisibility(View.GONE);
-                    mChickenVisibilityToggler.setText(R.string.show_image);
+                if (View.VISIBLE == mChickenView.getVisibility()) {
+                    mChickenView.setVisibility(View.GONE);
+                    mChickenVisibilityToggle.setText(R.string.show_image);
                 } else {
-                    mChikenView.setVisibility(View.VISIBLE);
-                    mChickenVisibilityToggler.setText(R.string.hide_image);
+                    mChickenView.setVisibility(View.VISIBLE);
+                    mChickenVisibilityToggle.setText(R.string.hide_image);
                 }
             }
         });
+
+        switch (getResources().getConfiguration().orientation){
+            case ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:
+                mOrientationLabel.setText(R.string.label_orientation_land);
+                break;
+            case ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
+                mOrientationLabel.setText(R.string.label_orientation_port);
+                break;
+        }
     }
 
     @Override

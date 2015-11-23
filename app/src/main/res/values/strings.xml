@@ -11,4 +11,6 @@
     <string name="message_hello_toast">Hello! I\'m toast message!</string>
     <string name="hide_image">Hide image</string>
     <string name="show_image">Show image</string>
+    <string name="label_orientation_land">Landscape orientation</string>
+    <string name="label_orientation_port">Portrait orientation</string>
 </resources>

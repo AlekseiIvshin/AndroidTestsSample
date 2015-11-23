@@ -8,8 +8,9 @@ import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.widget.TextView;
 
-import com.alekseiivhsin.samples.testedproject.*;
+import com.alekseiivhsin.samples.testedproject.MainActivity;
 import com.alekseiivhsin.samples.testedproject.R;
+import com.alekseiivhsin.samples.testedproject.test.frameworkextends.ChangeOrientationAction;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,7 +22,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withChild;
+import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -49,7 +50,7 @@ public class MainActivityTest {
 
     @Test
     @MediumTest
-    public void onClickShowMessage_shouldShowToast(){
+    public void onClickShowMessage_shouldShowToast() {
         // Given
         ViewInteraction showMessage = onView(withId(com.alekseiivhsin.samples.testedproject.R.id.show_message));
 
@@ -63,7 +64,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void clickHideImage_shouldHideImageAndChangeButtonText(){
+    public void clickHideImage_shouldHideImageAndChangeButtonText() {
         // Given
         ViewInteraction visibilityController = onView(withId(R.id.toggle_image_visibility));
         visibilityController.check(matches(withText("Hide image")));
@@ -78,4 +79,23 @@ public class MainActivityTest {
         visibilityController.check(matches(withText("Show image")));
         chickenImage.check(matches(not(isDisplayed())));
     }
+
+    @Test
+    public void onOrientationChangedToLand_shouldShowCurrentOrientationDescription() {
+        // When
+        onView(isRoot()).perform(ChangeOrientationAction.orientationLandscape());
+
+        // Then
+        onView(withText("Landscape orientation")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void onOrientationChangedToPort_shouldShowCurrentOrientationDescription() {
+        // When
+        onView(isRoot()).perform(ChangeOrientationAction.orientationPortrait());
+
+        // Then
+        onView(withText("Portrait orientation")).check(matches(isDisplayed()));
+    }
+
 }
