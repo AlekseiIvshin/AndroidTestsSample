@@ -4,6 +4,7 @@ import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.Toolbar;
+import android.test.suitebuilder.annotation.LargeTest;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.widget.TextView;
@@ -80,22 +81,24 @@ public class MainActivityTest {
         chickenImage.check(matches(not(isDisplayed())));
     }
 
-    @Test
-    public void onOrientationChangedToLand_shouldShowCurrentOrientationDescription() {
-        // When
-        onView(isRoot()).perform(ChangeOrientationAction.orientationLandscape());
-
-        // Then
-        onView(withText("Landscape orientation")).check(matches(isDisplayed()));
-    }
-
-    @Test
-    public void onOrientationChangedToPort_shouldShowCurrentOrientationDescription() {
-        // When
-        onView(isRoot()).perform(ChangeOrientationAction.orientationPortrait());
-
-        // Then
-        onView(withText("Portrait orientation")).check(matches(isDisplayed()));
-    }
+//    @LargeTest
+//    @Test
+//    public void onOrientationChangedToLand_shouldShowCurrentOrientationDescription() {
+//        // When
+//        onView(isRoot()).perform(ChangeOrientationAction.orientationLandscape());
+//
+//        // Then
+//        onView(withText("Landscape orientation")).check(matches(isDisplayed()));
+//    }
+//
+//    @LargeTest
+//    @Test
+//    public void onOrientationChangedToPort_shouldShowCurrentOrientationDescription() {
+//        // When
+//        onView(isRoot()).perform(ChangeOrientationAction.orientationPortrait());
+//
+//        // Then
+//        onView(withText("Portrait orientation")).check(matches(isDisplayed()));
+//    }
 
 }
