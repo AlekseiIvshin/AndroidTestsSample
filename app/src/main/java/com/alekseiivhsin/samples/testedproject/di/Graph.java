@@ -1,6 +1,7 @@
 package com.alekseiivhsin.samples.testedproject.di;
 
 import com.alekseiivhsin.samples.testedproject.NextActivity;
+import com.alekseiivhsin.samples.testedproject.TestedService;
 
 import javax.inject.Singleton;
 
@@ -15,6 +16,8 @@ import dagger.Component;
 public interface Graph {
 
     void inject(NextActivity nextActivity);
+
+    void inject(TestedService testedService);
 
     final class Initializer {
         public static Graph init() {

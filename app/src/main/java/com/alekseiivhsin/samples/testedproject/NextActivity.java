@@ -13,7 +13,6 @@ public class NextActivity extends AppCompatActivity {
     @Inject
     IMagicClass mMagicClass;
 
-
     private String mMagicValue;
 
     @Override
