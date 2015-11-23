@@ -8,7 +8,8 @@ import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.widget.TextView;
 
-import com.alekseiivhsin.samples.testedproject.MainActivity;
+import com.alekseiivhsin.samples.testedproject.*;
+import com.alekseiivhsin.samples.testedproject.R;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -20,6 +21,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withChild;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -58,5 +60,22 @@ public class MainActivityTest {
         onView(withText("Hello! I'm toast message!"))
                 .inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView()))))
                 .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void clickHideImage_shouldHideImageAndChangeButtonText(){
+        // Given
+        ViewInteraction visibilityController = onView(withId(R.id.toggle_image_visibility));
+        visibilityController.check(matches(withText("Hide image")));
+
+        ViewInteraction chickenImage = onView(withId(R.id.chicken));
+        chickenImage.check(matches(isDisplayed()));
+
+        // When
+        visibilityController.perform(click());
+
+        // Then
+        visibilityController.check(matches(withText("Show image")));
+        chickenImage.check(matches(not(isDisplayed())));
     }
 }

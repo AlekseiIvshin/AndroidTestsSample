@@ -9,4 +9,6 @@
     <!--<string name="message_hello_toast">Hi!</string>-->
     <!-- Uncomment for green test in MainActivityText-->
     <string name="message_hello_toast">Hello! I\'m toast message!</string>
+    <string name="hide_image">Hide image</string>
+    <string name="show_image">Show image</string>
 </resources>
