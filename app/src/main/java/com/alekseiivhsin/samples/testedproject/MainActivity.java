@@ -7,9 +7,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    View mChikenView;
+    Button mChickenVisibilityToggler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mChikenView = findViewById(R.id.chicken);
+        mChickenVisibilityToggler = (Button) findViewById(R.id.toggle_image_visibility);
 
         findViewById(R.id.show_next).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +37,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, getString(R.string.message_hello_toast), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        findViewById(R.id.toggle_image_visibility).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(View.VISIBLE == mChikenView.getVisibility()) {
+                    mChikenView.setVisibility(View.GONE);
+                    mChickenVisibilityToggler.setText(R.string.show_image);
+                } else {
+                    mChikenView.setVisibility(View.VISIBLE);
+                    mChickenVisibilityToggler.setText(R.string.hide_image);
+                }
             }
         });
     }
